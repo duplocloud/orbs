@@ -1,5 +1,5 @@
 description: >
-  This Job Deploy the duplo service for given image.
+  This Job used to bulk deploy the duplo services for given images.
 
 executor: aws
 
@@ -13,7 +13,7 @@ parameters:
 steps:
   - duplo_setup
   - run:
-      name: Deploy duplo service for given image
+      name: Bulk deploy duplo services for given images
       environment:
         DUPLO_TENANT: <<parameters.duplo_tenant>>
         SERVICES: <<parameters.services>>

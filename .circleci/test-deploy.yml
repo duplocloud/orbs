@@ -36,13 +36,19 @@ workflows:
       # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
       - command-test:
           filters: *filters
-      - duplocloud/update_service:
+      - duplocloud/update_services:
           context: qa-aws
           duplo_tenant: dev01
           services: |-
             [
               { "Name": "nginx-alpine", "Image": "nginx:latest" }
             ]
+          filters: *filters
+      - duplocloud/update_image:
+          context: qa-aws
+          duplo_tenant: dev01
+          service: nginx-alpine
+          image: nginx:latest
           filters: *filters
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:

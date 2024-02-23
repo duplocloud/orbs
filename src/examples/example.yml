@@ -10,10 +10,16 @@ usage:
   workflows:
     deploy-service:
       jobs:
-        - duplocloud/update_service:
+        - duplocloud/update_services:
             context: duplocloud
-            tenant: dev01
+            duplo_tenant: dev01
             services: |-
               [
-                { "Name": "nginx-alpine", "Image": "nginx:latest" }
+                { "Name": "nginx-service-1", "Image": "nginx:latest" },
+                { "Name": "nginx-service-2", "Image": "nginx:latest" }
               ]
+        - duplocloud/update_image:
+            context: duplocloud
+            duplo_tenant: dev01
+            service: nginx-service-1
+            image: nginx:latest

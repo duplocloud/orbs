@@ -19,18 +19,10 @@ workflows:
           filters: *filters
       - shellcheck/check:
           filters: *filters
-      - orb-tools/publish:
-          orb_name: duplocloud/orbs
-          vcs_type: << pipeline.project.type >>
-          requires:
-            [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
-          # Use a context to hold your publishing token.
-          context: orb-publishing
-          filters: *filters
       # Triggers the next workflow in the Orb Development Kit.
       - orb-tools/continue:
           pipeline_number: << pipeline.number >>
           vcs_type: << pipeline.project.type >>
           orb_name: duplocloud/orbs
-          requires: [orb-tools/publish]
+          requires: [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
           filters: *filters
