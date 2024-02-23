@@ -38,7 +38,7 @@ workflows:
           filters: *filters
       - duplocloud/update_service:
           context: qa-aws
-          tenant: dev01
+          duplo_tenant: dev01
           services: |-
             [
               { "Name": "nginx-alpine", "Image": "nginx:latest" }
