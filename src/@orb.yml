@@ -1,7 +1,9 @@
 version: 2.1
 
 description: >
-  Duplocloud's orb contains commands and jobs for circleci.
+  A collection of standard build tools for the duplocloud applications.
+  These create consistent build patterns and reduce the amount of code duplication.
+  This orb contains commands and jobs for duplocloud circleci.
 # What will your orb allow users to accomplish?
 # Descriptions should be short, simple, and informative.
 
