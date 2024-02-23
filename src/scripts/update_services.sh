@@ -12,7 +12,7 @@ for item in "${serviceList[@]}"; do
     serviceImage=$(echo "$item" | jq -r '.Image')
     echo "Service Name: ${serviceName}"
     echo "Service Image: ${serviceImage}"
-    allArgs+="-S ${serviceName} ${serviceImage} "
+    allArgs+="-S \"${serviceName}\" \"${serviceImage}\" "
 done
 
 echo "allArgs: ${allArgs}"
