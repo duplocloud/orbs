@@ -1,0 +1,20 @@
+description: >
+  This Job Deploy the duplo service for given image.
+
+executor: node
+
+parameters:
+  duplo_tenant:
+    type: string
+    description: The tenant to update the service in.
+  services:
+    type: string
+    description: Duplo service name and image parameters in JSON format.
+steps:
+  - duplo_setup
+  - run:
+      name: Deploy duplo service for given image
+      environment:
+        DUPLO_TENANT: <<parameters.duplo_tenant>>
+        SERVICES: <<parameters.services>>
+      command: <<include(scripts/update_service.sh)>>

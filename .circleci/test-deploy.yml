@@ -4,7 +4,7 @@ orbs:
   # Reference your orb's jobs and commands below as they will exist when built.
   orb-tools: circleci/orb-tools@12.0
   # The orb definition is intentionally not included here. It will be injected into the pipeline.
-  orbs: {}
+  duplocloud: duplocloud/duplo-orb@dev:<<pipeline.git.revision>>
 
 # Use this tag to ensure test jobs always run,
 # even though the downstream publish job will only run on release tags.
@@ -28,13 +28,21 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
-      - orbs/greet
+      - duplocloud/greet
 workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
       # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
       - command-test:
+          filters: *filters
+      - duplocloud/update_service:
+          context: qa-aws
+          tenant: dev01
+          services: |-
+            [
+              { "Name": "nginx-alpine", "Image": "nginx:latest" }
+            ]
           filters: *filters
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:

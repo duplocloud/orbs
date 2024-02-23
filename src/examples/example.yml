@@ -6,8 +6,14 @@ description: >
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    duplocloud: duplocloud/orbs:1.0.0
   workflows:
-    use-my-orb:
+    deploy-service:
       jobs:
-        - <orb-name>/<job-name>
+        - duplocloud/update_service:
+            context: duplocloud
+            tenant: dev01
+            services: |-
+              [
+                { "Name": "nginx-alpine", "Image": "nginx:latest" }
+              ]
