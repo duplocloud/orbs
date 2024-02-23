@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Param substitution
-# DUPLO_TENANT=$(circleci env subst "${DUPLO_TENANT}")
-
 echo "Tenant is: ${DUPLO_TENANT}"
 serviceList=$(echo "$SERVICES" | jq -c -r '.[]')
 for item in "${serviceList[@]}"; do
@@ -12,5 +9,3 @@ for item in "${serviceList[@]}"; do
     echo "Image: ${serviceImage}"
     duploctl service update_image "${serviceName}" "${serviceImage}"
 done
-
-duploctl service update_image "$SERVICE" "$FULL_IMAGE"
