@@ -17,4 +17,4 @@ steps:
       environment:
         DUPLO_TENANT: <<parameters.duplo_tenant>>
         SERVICES: <<parameters.services>>
-      command: <<include(scripts/update_service.sh)>>
+      command: <<include(scripts/update_services.sh)>>
