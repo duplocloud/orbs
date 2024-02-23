@@ -18,5 +18,5 @@ done
 echo "allArgs: ${allArgs}"
 
 if [ -n "${allArgs}" ]; then
-duploctl service bulk_update_image "${allArgs}"
+eval "$(echo duploctl service bulk_update_image "${allArgs}")"
 fi
