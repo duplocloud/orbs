@@ -52,6 +52,9 @@ workflows:
           filters: *filters
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:
+          requires:
+            - orbs/update_image
+            - orbs/update_services
           filters: *release-filters
       - orb-tools/publish:
           orb_name: duplocloud/orbs
