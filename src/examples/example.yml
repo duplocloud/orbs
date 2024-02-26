@@ -6,8 +6,20 @@ description: >
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    duplocloud: duplocloud/orbs:1.0.0
   workflows:
-    use-my-orb:
+    deploy-service:
       jobs:
-        - <orb-name>/<job-name>
+        - duplocloud/update_services:
+            context: duplocloud
+            duplo_tenant: dev01
+            services: |-
+              [
+                { "Name": "nginx-service-1", "Image": "nginx:latest" },
+                { "Name": "nginx-service-2", "Image": "nginx:latest" }
+              ]
+        - duplocloud/update_image:
+            context: duplocloud
+            duplo_tenant: dev01
+            service: nginx-service-1
+            image: nginx:latest

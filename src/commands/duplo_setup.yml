@@ -1,0 +1,6 @@
+description: >
+  This command installs duploctl.
+steps:
+  - run:
+      name: Setup Duplo
+      command: <<include(scripts/duplo_setup.sh)>>

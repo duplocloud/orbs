@@ -1,14 +1,16 @@
 version: 2.1
 
 description: >
-  Sample orb description
+  A collection of standard build tools for the duplocloud applications.
+  These create consistent build patterns and reduce the amount of code duplication.
+  This orb contains commands and jobs for duplocloud circleci.
 # What will your orb allow users to accomplish?
 # Descriptions should be short, simple, and informative.
 
 # This information will be displayed in the orb registry and is not mandatory.
 display:
-  home_url: "https://www.example.com/docs"
-  source_url: "https://github.com/duplocloud/orbs"
+  home_url: "https://duplocloud.com/"
+  source_url: "https://github.com/duplocloud"
 
 # If your orb requires other orbs, you can import them like this. Otherwise remove the "orbs" stanza.
 # orbs:
