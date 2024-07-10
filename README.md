@@ -5,11 +5,7 @@
 
 
 
-A project template for Orbs.
-
-This repository is designed to be automatically ingested and modified by the CircleCI CLI's `orb init` command.
-
-_**Edit this area to include a custom title and description.**_
+Shared Duplocloud orb commands for quick and easy CI/CD with CircleCI. This orb is a collection of commands that can be used in any CircleCI configuration file. The commands are designed to be simple and easy to use, and to provide a consistent experience across all projects.
 
 ---
 
