@@ -15,5 +15,6 @@ if [ "$PARAM_WAIT" = "true" ]; then
   DUPLO_WAIT="--wait"
 fi
 
-echo "Updating ${DUPLO_TENANT}/${PARAM_NAME} on ${DUPLO_HOST}"
+echo "Updating ${DUPLO_TENANT}/${PARAM_SERVICE} on ${DUPLO_HOST}"
+echo "Running: duploctl $PARAM_KIND update_image $PARAM_SERVICE $PARAM_IMAGE $DUPLO_WAIT"
 duploctl "$PARAM_KIND" update_image "$PARAM_SERVICE" "$PARAM_IMAGE" "$DUPLO_WAIT"
