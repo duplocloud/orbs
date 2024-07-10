@@ -19,7 +19,7 @@ parameters:
   image:
     description: The image to update the workload with.
     type: string
-  tenant: 
+  tenant:
     description: The tenant to update the service in.
     type: string
   wait:
