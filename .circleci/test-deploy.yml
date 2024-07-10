@@ -47,7 +47,7 @@ workflows:
       - duplocloud/update_image:
           context: qa-aws
           tenant: toolstest
-          name: nginx
+          service: nginx
           image: nginx:latest
           filters: *filters
       # The orb must be re-packed for publishing, and saved to the workspace.
