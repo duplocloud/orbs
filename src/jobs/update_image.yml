@@ -4,7 +4,7 @@ description: >
 executor: aws
 
 parameters:
-  type:
+  kind:
     description: The type of container system. (service, lambda, ecs, cronjob)
     type: enum
     default: service
@@ -13,7 +13,7 @@ parameters:
       - lambda
       - ecs
       - cronjob
-  name:
+  service:
     description: The name of the workload service.
     type: string
   image:
@@ -29,8 +29,8 @@ parameters:
 steps:
   - duplo_setup
   - update_image:
-      type: <<parameters.type>>
-      name: <<parameters.name>>
+      kind: <<parameters.kind>>
+      service: <<parameters.service>>
       image: <<parameters.image>>
       tenant: <<parameters.tenant>>
       wait: <<parameters.wait>>

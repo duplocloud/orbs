@@ -1,7 +1,7 @@
 description: >
   Updates the image for a containerized workload.
 parameters:
-  type:
+  kind:
     description: The type of container system. (service, lambda, ecs, cronjob)
     type: enum
     default: service
@@ -10,7 +10,7 @@ parameters:
       - lambda
       - ecs
       - cronjob
-  name:
+  service:
     description: The name of the workload service.
     type: string
   image:
@@ -27,8 +27,8 @@ steps:
   - run:
       name: Update Image
       environment:
-        PARAM_TYPE: <<parameters.type>>
-        PARAM_NAME: <<parameters.name>>
+        PARAM_KIND: <<parameters.kind>>
+        PARAM_SERVICE: <<parameters.service>>
         PARAM_IMAGE: <<parameters.image>>
         PARAM_WAIT: <<parameters.wait>>
         PARAM_TENANT: <<parameters.tenant>>

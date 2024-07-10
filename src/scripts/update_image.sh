@@ -4,8 +4,8 @@ export DUPLO_TENANT
 
 #Param substitution
 DUPLO_TENANT=$(circleci env subst "${PARAM_TENANT}")
-PARAM_TYPE=$(circleci env subst "${PARAM_TYPE}")
-PARAM_NAME=$(circleci env subst "${PARAM_NAME}")
+PARAM_KIND=$(circleci env subst "${PARAM_KIND}")
+PARAM_SERVICE=$(circleci env subst "${PARAM_SERVICE}")
 PARAM_IMAGE=$(circleci env subst "${PARAM_IMAGE}")
 PARAM_WAIT=$(circleci env subst "${PARAM_WAIT}")
 
@@ -16,4 +16,4 @@ if [ "$PARAM_WAIT" = "true" ]; then
 fi
 
 echo "Updating ${DUPLO_TENANT}/${PARAM_NAME} on ${DUPLO_HOST}"
-duploctl "$PARAM_TYPE" update_image "$PARAM_NAME" "$PARAM_IMAGE" "$DUPLO_WAIT"
+duploctl "$PARAM_KIND" update_image "$PARAM_SERVICE" "$PARAM_IMAGE" "$DUPLO_WAIT"
