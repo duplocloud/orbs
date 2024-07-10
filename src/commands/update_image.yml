@@ -1,8 +1,5 @@
 description: >
-  This Job Deploy the duplo service for given image.
-
-executor: aws
-
+  Updates the image for a containerized workload.
 parameters:
   type:
     description: The type of container system. (service, lambda, ecs, cronjob)
@@ -27,10 +24,12 @@ parameters:
     type: boolean
     default: false
 steps:
-  - duplo_setup
-  - update_image:
-      type: <<parameters.type>>
-      name: <<parameters.name>>
-      image: <<parameters.image>>
-      tenant: <<parameters.tenant>>
-      wait: <<parameters.wait>>
+  - run:
+      name: Update Image
+      environment:
+        PARAM_TYPE: <<parameters.type>>
+        PARAM_NAME: <<parameters.name>>
+        PARAM_IMAGE: <<parameters.image>>
+        PARAM_WAIT: <<parameters.wait>>
+        PARAM_TENANT: <<parameters.tenant>>
+      command: <<include(scripts/update_image.sh)>>
