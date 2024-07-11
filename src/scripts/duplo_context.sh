@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 PARAM_ADMIN=$(circleci env subst "${PARAM_ADMIN}")
+ADMIN_FLAG=""
 
 PORTAL_INFO="$(duploctl system info)"
 
@@ -14,25 +15,30 @@ echo "export AZURE_ENABLED=$AZURE_ENABLED" >> $BASH_ENV
 
 echo "Portal info discovered"
 
+# if is admin 
+if [[ "$PARAM_ADMIN" == "true" ]]; then
+  echo "Admin flag detected"
+  ADMIN_FLAG="--admin"
+  echo "export ADMIN_FLAG=$ADMIN_FLAG" >> $BASH_ENV
+else
+  echo "export ADMIN_FLAG=" >> $BASH_ENV
+fi
+
 # configure the cloud environments
 if [[ "$AWS_ENABLED" == "true" ]]; then
   echo "Configuring AWS Backend"
   DUPLO_ACCOUNT_ID="$(echo "$PORTAL_INFO" | jq -r '.DefaultAwsAccount')"
   DUPLO_DEFAULT_REGION="$(echo "$PORTAL_INFO" | jq -r '.DefaultAwsRegion')"
+  AWS_STS=$(duploctl jit aws -q '{AWS_ACCESS_KEY_ID: AccessKeyId, AWS_SECRET_ACCESS_KEY: SecretAccessKey, AWS_SESSION_TOKEN: SessionToken, AWS_REGION: Region}' -o env $ADMIN_FLAG)
+  for i in $AWS_STS; do 
+    echo "export $i" >> $BASH_ENV
+  done
   echo "export AWS_DEFAULT_REGION=$DUPLO_DEFAULT_REGION" >> $BASH_ENV
   echo "export AWS_ACCOUNT_ID=$DUPLO_ACCOUNT_ID" >> $BASH_ENV
 elif [[ "$GCP_ENABLED" == "true" ]]; then
   echo "Configuring GCP Backend"
 elif [[ "$AZURE_ENABLED" == "true" ]]; then
   echo "Configuring Azure Backend"
-fi
-
-# if is admin 
-if [[ "$PARAM_ADMIN" == "true" ]]; then
-  echo "Admin flag detected"
-  echo "export ADMIN_FLAG=--admin" >> $BASH_ENV
-else
-  echo "export ADMIN_FLAG=" >> $BASH_ENV
 fi
 
 echo "export DUPLO_ACCOUNT_ID=$DUPLO_ACCOUNT_ID" >> $BASH_ENV

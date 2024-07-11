@@ -1,19 +1,39 @@
 services:
-  duploctl-aws:
-    image: duplocloud/cimg/aws:latest
-    build: 
-      context: .
-      dockerfile: Dockerfile
-      args:
-        CIMG_BASE: aws
-        CIMG_VERSION: '2024.03'
-    container_name: cimg-aws
+  duplo-cimg-base: &base
+    image: $REPO/base:latest
+    build: &build
+      args: &args
+        CIMG_BASE: base
+        CIMG_VERSION: $CIMG_BASE
+        DUPLOCTL_VERSION: $DUPLOCTL_VERSION
+      tags:
+      - $REPO/base:latest
+      - $REPO/base:$CIMG_BASE
+      platforms: &platforms
+      - linux/amd64
+      - linux/arm64
+      x-bake: 
+        platforms: *platforms
+    container_name: cimg-base
     environment:
       DUPLO_HOST: $DUPLO_HOST
       DUPLO_TOKEN: $DUPLO_TOKEN
       DUPLO_TENANT: $DUPLO_TENANT
+    entrypoint:
+    - /bin/sh
+    - -c
     command:
-    - tenant
-    - list
-    - -q
-    - '[].AccountName'
+    - tail -f /dev/null
+  duplo-cimg-aws:
+    <<: *base
+    image: ${REPO}/aws:latest
+    container_name: cimg-aws
+    build:
+      <<: *build
+      args:
+        <<: *args
+        CIMG_BASE: aws
+        CIMG_VERSION: $CIMG_AWS
+      tags:
+      - $REPO/aws:latest
+      - $REPO/aws:$CIMG_AWS

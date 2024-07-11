@@ -1,7 +1,7 @@
 description: >
   This Job used to bulk deploy the duplo services for given images.
 
-executor: aws
+executor: duplo
 
 parameters:
   duplo_tenant:

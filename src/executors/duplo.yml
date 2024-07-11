@@ -3,14 +3,17 @@ description: >
 parameters:
   cloud:
     description: The base name of the image.
-  version:
-    default: '2024.03'
-    description: >
-      The cimg version.
+    default: base
     type: enum
     enum:
+    - base
     - aws
     - gcp
     - azure
+  version:
+    description: >
+      The cimg version.
+    default: '2024.03'
+    type: string
 docker:
   - image: duplocloud/cimg/<<parameters.cloud>>:<<parameters.version>>
