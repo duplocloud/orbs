@@ -1,6 +1,20 @@
 description: >
   This command installs duploctl.
+parameters:
+  version:
+    description: The version of duploctl to install.
+    type: string
+    default: latest
+  admin:
+    description: Assume admin privileges.
+    type: boolean
+    default: false
 steps:
   - run:
-      name: Setup Duplo
+      name: Install duploctl
       command: <<include(scripts/duplo_setup.sh)>>
+  - run:
+      name: Duplocloud Context
+      environment:
+        PARAM_ADMIN: <<parameters.admin>>
+      command: <<include(scripts/duplo_context.sh)>>

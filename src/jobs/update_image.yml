@@ -1,7 +1,7 @@
 description: >
   This Job Deploy the duplo service for given image.
 
-executor: aws
+executor: duploctl
 
 parameters:
   kind:

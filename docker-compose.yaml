@@ -1,0 +1,19 @@
+services:
+  duploctl-aws:
+    image: duplocloud/cimg/aws:latest
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CIMG_BASE: aws
+        CIMG_VERSION: '2024.03'
+    container_name: cimg-aws
+    environment:
+      DUPLO_HOST: $DUPLO_HOST
+      DUPLO_TOKEN: $DUPLO_TOKEN
+      DUPLO_TENANT: $DUPLO_TENANT
+    command:
+    - tenant
+    - list
+    - -q
+    - '[].AccountName'

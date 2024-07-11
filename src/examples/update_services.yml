@@ -1,5 +1,5 @@
 description: >
-  Sample example description.
+  Update many duplocloud kubernetes services images at once.
 # Provide a use-case based example for using this orb.
 # Everything in the `usage` section will be displayed in the orb registry.
 # Comments are not retained.
@@ -18,8 +18,4 @@ usage:
                 { "Name": "nginx-service-1", "Image": "nginx:latest" },
                 { "Name": "nginx-service-2", "Image": "nginx:latest" }
               ]
-        - duplocloud/update_image:
-            context: duplocloud
-            duplo_tenant: dev01
-            service: nginx-service-1
-            image: nginx:latest
+
