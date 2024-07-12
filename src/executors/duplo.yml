@@ -13,7 +13,7 @@ parameters:
   version:
     description: >
       The cimg version.
-    default: '2024.03'
+    default: latest
     type: string
 docker:
   - image: duplocloud/cimg/<<parameters.cloud>>:<<parameters.version>>

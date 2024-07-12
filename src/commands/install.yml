@@ -1,0 +1,11 @@
+description: >
+  This command installs duploctl and python if needed.
+parameters:
+  version:
+    description: The version of duploctl to install.
+    type: string
+    default: latest
+steps:
+  - run:
+      name: Install duploctl
+      command: <<include(scripts/duploctl_install.sh)>>

@@ -1,14 +1,14 @@
 services:
   duplo-cimg-base: &base
-    image: $REPO/base:latest
+    image: ${REPO}-base:latest
     build: &build
       args: &args
-        CIMG_BASE: base
+        CIMG_BASE: python
         CIMG_VERSION: $CIMG_BASE
         DUPLOCTL_VERSION: $DUPLOCTL_VERSION
       tags:
-      - $REPO/base:latest
-      - $REPO/base:$CIMG_BASE
+      - ${REPO}-base:latest
+      - ${REPO}-base:$CIMG_BASE
       platforms: &platforms
       - linux/amd64
       - linux/arm64
@@ -26,7 +26,7 @@ services:
     - tail -f /dev/null
   duplo-cimg-aws:
     <<: *base
-    image: ${REPO}/aws:latest
+    image: ${REPO}-aws:latest
     container_name: cimg-aws
     build:
       <<: *build
@@ -35,5 +35,5 @@ services:
         CIMG_BASE: aws
         CIMG_VERSION: $CIMG_AWS
       tags:
-      - $REPO/aws:latest
-      - $REPO/aws:$CIMG_AWS
+      - ${REPO}-aws:latest
+      - ${REPO}-aws:$CIMG_AWS

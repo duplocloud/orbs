@@ -23,6 +23,10 @@ workflows:
       - orb-tools/continue:
           pipeline_number: << pipeline.number >>
           vcs_type: << pipeline.project.type >>
-          orb_name: duplocloud
-          requires: [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
+          orb_name: duplo
+          requires: 
+            - orb-tools/lint
+            - orb-tools/review
+            - orb-tools/pack
+            - shellcheck/check
           filters: *filters

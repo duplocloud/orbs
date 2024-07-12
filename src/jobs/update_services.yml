@@ -10,8 +10,8 @@ parameters:
   services:
     type: string
     description: Duplo service name and image parameters in JSON format.
+    
 steps:
-  - duplo_setup
   - run:
       name: Bulk deploy duplo services for given images
       environment:

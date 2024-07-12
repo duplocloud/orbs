@@ -1,7 +1,9 @@
 description: >
   This Job Deploy the duplo service for given image.
 
-executor: duplo
+executor: 
+  name: duplo
+  cloud: base
 
 parameters:
   kind:
