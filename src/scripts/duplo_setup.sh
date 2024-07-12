@@ -14,8 +14,6 @@ export DUPLO_TENANT=${PARAM_TENANT:-$DUPLO_TENANT}
 
 echo "Setting up Duplo environment in $DUPLO_TENANT"
 
-duploctl version -o yaml
-duploctl system info -o yaml
 PORTAL_INFO="$(duploctl system info)"
 
 AWS_ENABLED="$(echo "$PORTAL_INFO" | jq -r '.IsAwsCloudEnabled')"

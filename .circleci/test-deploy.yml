@@ -55,6 +55,7 @@ workflows:
         image: nginx:latest
     - orb_tests:
         filters: *filters
+        context: qa-aws
         requires:
         - duplo/update_image
         - duplo/update_services
