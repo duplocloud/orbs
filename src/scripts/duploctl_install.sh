@@ -36,7 +36,7 @@ then
     if [[ "$PARAM_VERSION" == "latest" ]]; then
         pip install duplocloud-client
     else
-        pip install duplocloud-client==$PARAM_VERSION
+        pip install "duplocloud-client==$PARAM_VERSION"
     fi
     echo "Successfully installed duploctl"
 fi

@@ -16,4 +16,4 @@ parameters:
     default: latest
     type: string
 docker:
-  - image: duplocloud/cimg/<<parameters.cloud>>:<<parameters.version>>
+- image: duplocloud/cimg/<<parameters.cloud>>:<<parameters.version>>

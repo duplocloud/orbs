@@ -14,18 +14,18 @@ parameters:
     description: Assume admin privileges.
     type: boolean
     default: false
-  account-id: 
+  account-id:
     required: false
     description: Overide the cloud account id from the default. Required when on gcp/azure where this would be the project name.
-  credentials: 
+  credentials:
     required: false
     description: Cloud credentials for Azure or GCP.
 steps:
-  - run:
-      name: Duplocloud Context
-      environment:
-        PARAM_ADMIN: <<parameters.admin>>
-        PARAM_ACCOUNT_ID: <<parameters.account-id>>
-        PARAM_CREDENTIALS: <<parameters.credentials>>
-        PARAM_CLOUD: <<parameters.cloud>>
-      command: <<include(scripts/duplo_setup.sh)>>
+- run:
+    name: Duplocloud Context
+    environment:
+      PARAM_ADMIN: <<parameters.admin>>
+      PARAM_ACCOUNT_ID: <<parameters.account-id>>
+      PARAM_CREDENTIALS: <<parameters.credentials>>
+      PARAM_CLOUD: <<parameters.cloud>>
+    command: <<include(scripts/duplo_setup.sh)>>

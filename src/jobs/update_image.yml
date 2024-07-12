@@ -11,10 +11,10 @@ parameters:
     type: enum
     default: service
     enum:
-      - service
-      - lambda
-      - ecs
-      - cronjob
+    - service
+    - lambda
+    - ecs
+    - cronjob
   service:
     description: The name of the workload service.
     type: string
@@ -29,9 +29,9 @@ parameters:
     type: boolean
     default: false
 steps:
-  - update_image:
-      kind: <<parameters.kind>>
-      service: <<parameters.service>>
-      image: <<parameters.image>>
-      tenant: <<parameters.tenant>>
-      wait: <<parameters.wait>>
+- update_image:
+    kind: <<parameters.kind>>
+    service: <<parameters.service>>
+    image: <<parameters.image>>
+    tenant: <<parameters.tenant>>
+    wait: <<parameters.wait>>

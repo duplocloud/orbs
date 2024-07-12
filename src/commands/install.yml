@@ -6,6 +6,6 @@ parameters:
     type: string
     default: latest
 steps:
-  - run:
-      name: Install duploctl
-      command: <<include(scripts/duploctl_install.sh)>>
+- run:
+    name: Install duploctl
+    command: <<include(scripts/duploctl_install.sh)>>

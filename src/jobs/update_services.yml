@@ -12,9 +12,9 @@ parameters:
     description: Duplo service name and image parameters in JSON format.
     
 steps:
-  - run:
-      name: Bulk deploy duplo services for given images
-      environment:
-        DUPLO_TENANT: <<parameters.duplo_tenant>>
-        SERVICES: <<parameters.services>>
-      command: <<include(scripts/update_services.sh)>>
+- run:
+    name: Bulk deploy duplo services for given images
+    environment:
+      DUPLO_TENANT: <<parameters.duplo_tenant>>
+      SERVICES: <<parameters.services>>
+    command: <<include(scripts/update_services.sh)>>

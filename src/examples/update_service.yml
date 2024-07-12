@@ -10,9 +10,9 @@ usage:
   workflows:
     deploy-service:
       jobs:
-        - duplocloud/update_image:
-            context: duplocloud
-            tenant: dev01
-            kind: service
-            service: nginx-service-1
-            image: nginx:latest
+      - duplocloud/update_image:
+          context: duplocloud
+          tenant: dev01
+          kind: service
+          service: nginx-service-1
+          image: nginx:latest
