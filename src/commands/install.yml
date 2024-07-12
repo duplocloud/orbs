@@ -8,4 +8,6 @@ parameters:
 steps:
 - run:
     name: Install duploctl
+    environment:
+      PARAM_VERSION: <<parameters.version>>
     command: <<include(scripts/duploctl_install.sh)>>
