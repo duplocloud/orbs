@@ -1,6 +1,6 @@
 description: >
   This command installs duploctl and python if needed.
-parameters:  
+parameters:
   version:
     description: The version of duploctl to install.
     type: string
