@@ -1,0 +1,19 @@
+description: >
+  The duploctl ready cimg.
+parameters:
+  cloud:
+    description: The base name of the image.
+    default: base
+    type: enum
+    enum:
+    - base
+    - aws
+    - gcp
+    - azure
+  version:
+    description: >
+      The cimg version.
+    default: latest
+    type: string
+docker:
+- image: duplocloud/cimg-<<parameters.cloud>>:<<parameters.version>>

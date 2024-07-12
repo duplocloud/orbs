@@ -1,0 +1,20 @@
+description: >
+  Update many duplocloud kubernetes services images at once.
+# Provide a use-case based example for using this orb.
+# Everything in the `usage` section will be displayed in the orb registry.
+# Comments are not retained.
+usage:
+  version: 2.1
+  orbs:
+    duplo: duplocloud/orbs:1.0.0
+  workflows:
+    deploy-service:
+      jobs:
+      - duplo/update_services:
+          context: duplocloud
+          tenant: dev01
+          services: |-
+            [
+              { "Name": "nginx-service-1", "Image": "nginx:latest" },
+              { "Name": "nginx-service-2", "Image": "nginx:latest" }
+            ]

@@ -1,0 +1,38 @@
+description: >-
+  Sets up and configures the environment for Duplocloud. This can configure kubectl, aws, gcp, and azure.
+parameters:
+  cloud:
+    description: The base name of the image.
+    default: base
+    type: enum
+    enum:
+    - base
+    - aws
+    - gcp
+    - azure
+  admin:
+    description: Assume admin privileges.
+    type: boolean
+    default: false
+  account_id:
+    description: Overide the cloud account id from the default. Required when on gcp/azure where this would be the project name.
+    type: string
+    default: ''
+  credentials:
+    description: Cloud credentials for Azure or GCP.
+    type: string
+    default: ''
+  tenant:
+    description: Tenant for Duplocloud.
+    type: string
+    default: ''
+steps:
+- run:
+    name: Duplocloud Context
+    environment:
+      PARAM_ADMIN: <<parameters.admin>>
+      PARAM_ACCOUNT_ID: <<parameters.account_id>>
+      PARAM_CREDENTIALS: <<parameters.credentials>>
+      PARAM_CLOUD: <<parameters.cloud>>
+      PARAM_TENANT: <<parameters.tenant>>
+    command: <<include(scripts/duplo_setup.sh)>>

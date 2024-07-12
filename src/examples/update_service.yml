@@ -1,0 +1,18 @@
+description: >
+  Update a duplocloud kubernetes service images.
+# Provide a use-case based example for using this orb.
+# Everything in the `usage` section will be displayed in the orb registry.
+# Comments are not retained.
+usage:
+  version: 2.1
+  orbs:
+    duplo: duplocloud/orbs:1.0.0
+  workflows:
+    deploy-service:
+      jobs:
+      - duplo/update_image:
+          context: duplocloud
+          tenant: dev01
+          kind: service
+          service: nginx-service-1
+          image: nginx:latest
