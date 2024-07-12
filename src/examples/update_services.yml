@@ -6,13 +6,13 @@ description: >
 usage:
   version: 2.1
   orbs:
-    duplocloud: duplocloud/orbs:1.0.0
+    duplo: duplocloud/orbs:1.0.0
   workflows:
     deploy-service:
       jobs:
-      - duplocloud/update_services:
+      - duplo/update_services:
           context: duplocloud
-          duplo_tenant: dev01
+          tenant: dev01
           services: |-
             [
               { "Name": "nginx-service-1", "Image": "nginx:latest" },

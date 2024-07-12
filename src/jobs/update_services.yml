@@ -2,7 +2,7 @@ description: >
   This Job used to bulk deploy the duplo services for given images.
 executor: duplo
 parameters:
-  duplo_tenant:
+  tenant:
     type: string
     description: The tenant to update the service in.
   services:
@@ -12,6 +12,6 @@ steps:
 - run:
     name: Bulk deploy duplo services for given images
     environment:
-      DUPLO_TENANT: <<parameters.duplo_tenant>>
+      DUPLO_TENANT: <<parameters.tenant>>
       SERVICES: <<parameters.services>>
     command: <<include(scripts/update_services.sh)>>

@@ -6,11 +6,11 @@ description: >
 usage:
   version: 2.1
   orbs:
-    duplocloud: duplocloud/orbs:1.0.0
+    duplo: duplocloud/orbs:1.0.0
   workflows:
     deploy-service:
       jobs:
-      - duplocloud/update_image:
+      - duplo/update_image:
           context: duplocloud
           tenant: dev01
           kind: service
