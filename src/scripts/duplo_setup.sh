@@ -33,10 +33,12 @@ if [[ "$AWS_ENABLED" == "true" ]]; then
   echo "Configuring AWS Backend"
   PARAM_ACCOUNT_ID="$(echo "$PORTAL_INFO" | jq -r '.DefaultAwsAccount')"
   DUPLO_DEFAULT_REGION="$(echo "$PORTAL_INFO" | jq -r '.DefaultAwsRegion')"
-  AWS_STS=$(duploctl jit aws -q '{AWS_ACCESS_KEY_ID: AccessKeyId, AWS_SECRET_ACCESS_KEY: SecretAccessKey, AWS_SESSION_TOKEN: SessionToken, AWS_REGION: Region}' -o env $ADMIN_FLAG)
-  for i in $AWS_STS; do 
-    echo "export $i" >> "$BASH_ENV"
-  done
+  duploctl jit aws -q '{AWS_ACCESS_KEY_ID: AccessKeyId, AWS_SECRET_ACCESS_KEY: SecretAccessKey, AWS_SESSION_TOKEN: SessionToken, AWS_REGION: Region}' -o env $ADMIN_FLAG
+  # AWS_STS=$(duploctl jit aws -q '{AWS_ACCESS_KEY_ID: AccessKeyId, AWS_SECRET_ACCESS_KEY: SecretAccessKey, AWS_SESSION_TOKEN: SessionToken, AWS_REGION: Region}' -o env $ADMIN_FLAG)
+  
+  # for i in $AWS_STS; do 
+  #   echo "export $i" >> "$BASH_ENV"
+  # done
   {
     echo "export AWS_DEFAULT_REGION=$DUPLO_DEFAULT_REGION"
     echo "export AWS_ACCOUNT_ID=$DUPLO_ACCOUNT_ID"
