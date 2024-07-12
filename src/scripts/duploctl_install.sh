@@ -12,7 +12,7 @@ then
 fi
 
 # if pip is not installed
-if ! command -v pip3 &> /dev/null
+if ! command -v pip &> /dev/null
 then
     echo "Pip could not be found"
     packagesNeeded+=("python3-pip")
@@ -31,7 +31,7 @@ elif [ -x "$(command -v dnf)" ];     then sudo dnf install "${packagesNeeded[*]}
 elif [ -x "$(command -v zypper)" ];  then sudo zypper install "${packagesNeeded[*]}"
 else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: ${packagesNeeded[*]}">&2; fi
 
-if ! command -v pip3 &> /dev/null
+if ! command -v pip &> /dev/null
 then
     if [[ "$PARAM_VERSION" == "latest" ]]; then
         pip install duplocloud-client
