@@ -15,11 +15,13 @@ parameters:
     type: boolean
     default: false
   account-id:
-    required: false
     description: Overide the cloud account id from the default. Required when on gcp/azure where this would be the project name.
+    type: string
+    default: ''
   credentials:
-    required: false
     description: Cloud credentials for Azure or GCP.
+    type: string
+    default: ''
 steps:
 - run:
     name: Duplocloud Context
