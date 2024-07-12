@@ -22,7 +22,7 @@ release-filters: &release-filters
 jobs:
   # Create jobs to test the commands of your orbs.
   # You may want to add additional validation steps to ensure the commands are working as expected.
-  setup-test:
+  orb_tests:
     docker:
     - image: cimg/aws:2024.03
     steps:
@@ -39,9 +39,6 @@ workflows:
     jobs:
     # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
     # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
-    - setup-test:
-        filters: *filters
-        context: qa-aws
     - duplo/update_services:
         filters: *filters
         context: qa-aws
@@ -56,12 +53,15 @@ workflows:
         tenant: toolstest
         service: nginx
         image: nginx:latest
+    - orb_tests:
+        filters: *filters
+        requires:
+        - duplo/update_image
+        - duplo/update_services
     # The orb must be re-packed for publishing, and saved to the workspace.
     - orb-tools/pack:
         requires:
-          - setup-test
-          - duplo/update_image
-          - duplo/update_services
+        - orb_tests
         filters: *release-filters
     - orb-tools/publish:
         filters: *release-filters
