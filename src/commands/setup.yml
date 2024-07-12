@@ -22,6 +22,10 @@ parameters:
     description: Cloud credentials for Azure or GCP.
     type: string
     default: ''
+  tenant:
+    description: Tenant for Duplocloud.
+    type: string
+    default: ''
 steps:
 - run:
     name: Duplocloud Context
@@ -30,4 +34,5 @@ steps:
       PARAM_ACCOUNT_ID: <<parameters.account_id>>
       PARAM_CREDENTIALS: <<parameters.credentials>>
       PARAM_CLOUD: <<parameters.cloud>>
+      PARAM_TENANT: <<parameters.tenant>>
     command: <<include(scripts/duplo_setup.sh)>>

@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 
+function fail {
+    printf '%s\n' "$1" >&2 ## Send message to stderr.
+    exit "${2-1}" ## Return a code specified by $2, or 1 by default.
+}
+
 PARAM_ADMIN=$(circleci env subst "${PARAM_ADMIN}")
 PARAM_CLOUD=$(circleci env subst "${PARAM_CLOUD}")
 PARAM_ACCOUNT_ID=$(circleci env subst "${PARAM_ACCOUNT_ID}")
+PARAM_TENANT=$(circleci env subst "${PARAM_TENANT}")
 ADMIN_FLAG=""
+export DUPLO_TENANT=${PARAM_TENANT:-$DUPLO_TENANT}
 
 PORTAL_INFO="$(duploctl system info)"
 
@@ -26,6 +33,10 @@ if [[ "$PARAM_ADMIN" == "true" ]]; then
   echo "export ADMIN_FLAG=$ADMIN_FLAG" >> "$BASH_ENV"
 else
   echo "export ADMIN_FLAG=" >> "$BASH_ENV"
+  # DUPLO_TENANT is an empty string or not set
+  if [[ -z "$DUPLO_TENANT" ]]; then
+    fail "DUPLO_TENANT is required for non-admin users"
+  fi
 fi
 
 # configure the cloud environments
