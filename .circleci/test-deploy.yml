@@ -45,7 +45,7 @@ workflows:
     - duplo/update_services:
         filters: *filters
         context: qa-aws
-        duplo_tenant: toolstest
+        tenant: toolstest
         services: |-
           [
             { "Name": "nginx", "Image": "nginx:latest" }
