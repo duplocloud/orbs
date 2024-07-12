@@ -18,4 +18,3 @@ usage:
               { "Name": "nginx-service-1", "Image": "nginx:latest" },
               { "Name": "nginx-service-2", "Image": "nginx:latest" }
             ]
-

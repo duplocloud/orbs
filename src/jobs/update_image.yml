@@ -1,10 +1,8 @@
 description: >
   This Job Deploy the duplo service for given image.
-
 executor: 
   name: duplo
   cloud: base
-
 parameters:
   kind:
     description: The type of container system. (service, lambda, ecs, cronjob)

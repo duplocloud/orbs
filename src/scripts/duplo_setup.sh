@@ -11,9 +11,11 @@ AWS_ENABLED="$(echo "$PORTAL_INFO" | jq -r '.IsAwsCloudEnabled')"
 GCP_ENABLED="$(echo "$PORTAL_INFO" | jq -r '.IsGoogleCloudEnabled')"
 AZURE_ENABLED="$(echo "$PORTAL_INFO" | jq -r '.IsAzureCloudEnabled')"
 
-echo "export AWS_ENABLED=$AWS_ENABLED" >> "$BASH_ENV"
-echo "export GCP_ENABLED=$GCP_ENABLED" >> "$BASH_ENV"
-echo "export AZURE_ENABLED=$AZURE_ENABLED" >> "$BASH_ENV"
+{
+  echo "export AWS_ENABLED=$AWS_ENABLED"
+  echo "export GCP_ENABLED=$GCP_ENABLED"
+  echo "export AZURE_ENABLED=$AZURE_ENABLED"
+} >> "$BASH_ENV"
 
 echo "Portal info discovered"
 
@@ -35,17 +37,19 @@ if [[ "$AWS_ENABLED" == "true" ]]; then
   for i in $AWS_STS; do 
     echo "export $i" >> "$BASH_ENV"
   done
-  echo "export AWS_DEFAULT_REGION=$DUPLO_DEFAULT_REGION" >> "$BASH_ENV"
-  echo "export AWS_ACCOUNT_ID=$DUPLO_ACCOUNT_ID" >> "$BASH_ENV"
+  {
+    echo "export AWS_DEFAULT_REGION=$DUPLO_DEFAULT_REGION"
+    echo "export AWS_ACCOUNT_ID=$DUPLO_ACCOUNT_ID"
+  } >> "$BASH_ENV"
 elif [[ "$GCP_ENABLED" == "true" ]]; then
   echo "Configuring GCP Backend"
 elif [[ "$AZURE_ENABLED" == "true" ]]; then
   echo "Configuring Azure Backend"
 fi
 
-echo "export DUPLO_ACCOUNT_ID=$PARAM_ACCOUNT_ID" >> "$BASH_ENV"
-echo "export DUPLO_DEFAULT_REGION=$DUPLO_DEFAULT_REGION" >> "$BASH_ENV"
-
-# re-export duplo creds as lowercase
-echo "export duplo_token=$DUPLO_TOKEN" >> "$BASH_ENV"
-echo "export duplo_host=$DUPLO_HOST" >> "$BASH_ENV"
+{
+  echo "export DUPLO_ACCOUNT_ID=$PARAM_ACCOUNT_ID"
+  echo "export DUPLO_DEFAULT_REGION=$DUPLO_DEFAULT_REGION"
+  echo "export duplo_token=$DUPLO_TOKEN" 
+  echo "export duplo_host=$DUPLO_HOST"
+} >> "$BASH_ENV"

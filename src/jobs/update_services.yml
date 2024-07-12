@@ -1,8 +1,6 @@
 description: >
   This Job used to bulk deploy the duplo services for given images.
-
 executor: duplo
-
 parameters:
   duplo_tenant:
     type: string
@@ -10,7 +8,6 @@ parameters:
   services:
     type: string
     description: Duplo service name and image parameters in JSON format.
-    
 steps:
 - run:
     name: Bulk deploy duplo services for given images
