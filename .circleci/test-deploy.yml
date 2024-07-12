@@ -40,6 +40,7 @@ workflows:
     # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
     - setup-test:
         filters: *filters
+        context: qa-aws
     - duplo/update_services:
         filters: *filters
         context: qa-aws
