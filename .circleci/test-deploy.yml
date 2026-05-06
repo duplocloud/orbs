@@ -30,10 +30,22 @@ jobs:
     # Run your orb's commands to validate them.
     - duplo/install
     - duplo/setup:
-        cloud: aws 
+        cloud: aws
         admin: true
         tenant: toolstest
     - run: aws sts get-caller-identity
+  # Regression test for DUPLO-42822: duplo/install must work on the cimg/base 2026.x
+  # line, which moved to Ubuntu 24.04 and enforces PEP 668.
+  install_smoke_cimg_base_2026:
+    docker:
+    - image: cimg/base:2026.02
+    steps:
+    - duplo/install
+    - run:
+        name: Verify duploctl is on PATH
+        command: |
+          command -v duploctl
+          duploctl --help >/dev/null
 workflows:
   test-deploy:
     jobs:
@@ -59,10 +71,13 @@ workflows:
         requires:
         - duplo/update_image
         - duplo/update_services
+    - install_smoke_cimg_base_2026:
+        filters: *filters
     # The orb must be re-packed for publishing, and saved to the workspace.
     - orb-tools/pack:
         requires:
         - orb_tests
+        - install_smoke_cimg_base_2026
         filters: *release-filters
     - orb-tools/publish:
         filters: *release-filters
