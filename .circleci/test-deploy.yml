@@ -32,7 +32,7 @@ jobs:
     - duplo/setup:
         cloud: aws
         admin: true
-        tenant: toolstest
+        tenant: duplo-tools
     - run: aws sts get-caller-identity
   # Regression test for DUPLO-42822: duplo/install must work on the cimg/base 2026.x
   # line, which moved to Ubuntu 24.04 and enforces PEP 668.
@@ -53,21 +53,21 @@ workflows:
     # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
     - duplo/update_services:
         filters: *filters
-        context: qa-aws
-        tenant: toolstest
+        context: test24
+        tenant: duplo-tools
         services: |-
           [
             { "Name": "nginx", "Image": "nginx:latest" }
           ]
     - duplo/update_image:
         filters: *filters
-        context: qa-aws
-        tenant: toolstest
+        context: test24
+        tenant: duplo-tools
         service: nginx
         image: nginx:latest
     - orb_tests:
         filters: *filters
-        context: qa-aws
+        context: test24
         requires:
         - duplo/update_image
         - duplo/update_services
